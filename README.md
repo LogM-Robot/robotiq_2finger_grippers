@@ -12,9 +12,11 @@ Note: This package is based on [waypointrobotics/robotiq_85_gripper](https://git
 
 *A pull request to this packages requires further analysis since I performed many structural changes, which will create conflict for previous users.*
 ### Ros Distro
-This package has been tested on `Kinetic` and `Melodic`.
+This package has been tested on `Noetic`.
 # Contents
 - [Contents](#contents)
+- [Installation](#installation)
+  - [Dependencies](#dependencies)
 - [Operation Instructions](#operation-instructions)
   - [Serial Port Configuration](#serial-port-configuration)
   - [Test communication and control](#test-communication-and-control)
@@ -26,6 +28,13 @@ This package has been tested on `Kinetic` and `Melodic`.
     - [Command gripper through an instance of a `SimpleActionClient` in Python](#command-gripper-through-an-instance-of-a-simpleactionclient-in-python)
     - [Command gripper through an instance of a `SimpleActionClient` in C++](#command-gripper-through-an-instance-of-a-simpleactionclient-in-c)
   - [Operation of Multiple Grippers](#operation-of-multiple-grippers)
+
+# Installation
+Clone this repository into your catkin workspace and compile the package using `catkin build`. Before that, make sure you have installed the following dependencies:
+## Dependencies
+``` bash
+pip3 install pyserial pymodbus==1.3.2 numpy 
+```
 # Operation Instructions
 
 Prior to executing control of the grippers make sure you have connected a [_2-finger adaptive gripper model_](https://robotiq.com/support/2-finger-adaptive-robot-gripper) to a USB port of your computer. The RS-485 to USB converter _ACC-ADT-USB-RS485_ that comes by default when you order these grippers allow connecting the 2-finger gripper directly to a computer through a USB 2.0 port using Modbus RTU communication protocol.
@@ -48,7 +57,7 @@ The output should look something similar to:
 On a new terminal type the following line:
 ```
 # Connect and move 85 mm gripper  
-roslaunch robotiq_2f_gripper_control test_85mm_gripper.launch comport:="<YOUR GRIPPER TTY PORT NAME>"
+roslaunch robotiq_2f_gripper_control test_85mm_gripper.launch comport:="<YOUR GRIPPER TTY PORT NAME, default="/dev/ttyUSB0">"
 # Simulate 85mm gripper 
 roslaunch robotiq_2f_gripper_control test_85mm_gripper.launch sim:=true
 ```
